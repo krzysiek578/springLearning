@@ -1,6 +1,6 @@
-package com.spring.learn.shape;
+package com.spring.learn.calculator;
 
-import org.junit.Assert;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -10,49 +10,51 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class SpringRunnerTestSuite {
+public class CalculatorTestSuite {
     @Test
-    public void testCircleLoadedIntoContainer() {
+    public void testAdd() {
         //Given
         ApplicationContext context = new AnnotationConfigApplicationContext("com.spring.learn");
-        Shape shape = (Shape) context.getBean("circle");
+        Calculator calculator = (Calculator) context.getBean("calculator");
         //When
-        String name = shape.getShapeName();
+        Double result = calculator.add(4.5 , 3.2);
         //Then
-        Assert.assertEquals("It is a circle!", name);
-
+        Assertions.assertEquals(7.7, result);
     }
 
     @Test
-    public void testTriangleLoadedIntoContainer() {
+    public void testSub() {
         //Given
         ApplicationContext context = new AnnotationConfigApplicationContext("com.spring.learn");
-        Shape shape = (Shape) context.getBean("triangle");
+        Calculator calculator = (Calculator) context.getBean("calculator");
         //When
-        String name = shape.getShapeName();
+        Double result = calculator.sub(4.5 , 3.2);
         //Then
-        Assert.assertEquals("It is a triangle!", name);
+        Assertions.assertEquals(1.3, result, 0.001);
     }
 
-    @Test
-    public void testSquareLoadedIntoContainer() {
-        //Given
-        ApplicationContext context = new AnnotationConfigApplicationContext("com.spring.learn");
-        Shape shape = (Shape) context.getBean("createSquare");
-        //When
-        String result = shape.getShapeName();
-        //Then
-        Assert.assertEquals("This is a square", result);
-    }
 
     @Test
-    public void testShapeLoadedIntoContainer() {
+    public void testMulti() {
         //Given
         ApplicationContext context = new AnnotationConfigApplicationContext("com.spring.learn");
-        Shape shape = (Shape) context.getBean("theChosenShape");
+        Calculator calculator = (Calculator) context.getBean("calculator");
         //When
-        String name = shape.getShapeName();
+        Double result = calculator.multi(4.5 , 3.2);
         //Then
-        System.out.println("Chosen shape says: " + name);
+        Assertions.assertEquals(14.4, result);
     }
+
+
+    @Test
+    public void testDiv() {
+        //Given
+        ApplicationContext context = new AnnotationConfigApplicationContext("com.spring.learn");
+        Calculator calculator = (Calculator) context.getBean("calculator");
+        //When
+        Double result = calculator.div(4.5 , 3.2);
+        //Then
+        Assertions.assertEquals(1.40625, result);
+    }
+
 }
