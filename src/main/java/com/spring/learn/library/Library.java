@@ -6,20 +6,24 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 
+
+//Dlaczego tutaj nie pojawia się błąd skoro są dwa konstruktory a nie ma żadnej konfiguracji? W momencie dodania @Autowirde pojawia się błąd
+
 @Service
 public class Library {
     private final List<String> books = new ArrayList<>();
-    @Autowired
+
     private LibraryDbController libraryDbController;
+
+
+    public Library(LibraryDbController libraryDbController) {
+        this.libraryDbController = libraryDbController;
+    }
 
     public Library(){
         //do nothing
     }
 
-//    @Autowired
-//    public void setLibraryDbController(LibraryDbController libraryDbController) {
-//        this.libraryDbController = libraryDbController;
-//    }
 
     public void saveToDb() {
         libraryDbController.saveData();
